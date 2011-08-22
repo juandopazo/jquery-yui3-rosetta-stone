@@ -37,8 +37,8 @@
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
+      <th class="jq">jQuery 1.6.2</th>
+      <th class="yui">YUI 3.4.0</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -82,8 +82,8 @@ YUI().use('<i>node</i>', '<i>module2</i>', '<i>module3</i>', function (Y) {
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
+      <th class="jq">jQuery 1.6.2</th>
+      <th class="yui">YUI 3.4.0</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -248,6 +248,24 @@ if (foo.size()) {
     <tr>
       <td class="code">
 <pre class="code jq">
+.prop('<i>foo</i>')
+.prop('<i>foo</i>', '<i>bar</i>')
+</pre>
+      </td>
+      <td class="code">
+<pre class="code yui">
+.get('<i>foo</i>')
+.set('<i>foo</i>', '<i>bar</i>')
+</pre>
+      </td>
+      <td class="notes">
+        <p>Get/set DOM properties instead of HTML attributes.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="code">
+<pre class="code jq">
 $.trim('<i> foo </i>');
 </pre>
       </td>
@@ -270,7 +288,7 @@ Y.Lang.trim('<i> foo </i>');
 .mouseout(<i>fn</i>)
 .mouseover(<i>fn</i>)
 
-<i>// jQuery 1.4.2 and later allows you to
+<i>// jQuery 1.6.2 and later allows you to
 // register events when creating the element
 </i>$('&lt;p/&gt;',{
   text      :<i>'foo'</i>, 
@@ -344,7 +362,7 @@ Y.Lang.trim('<i> foo </i>');
       <td class="notes">
         <p>Appends <code>child</code> to <code>parent</code>, and returns <code>child</code>.</p>
 
-        <p><code>.appendTo()</code> was added to YUI in 3.3.0.</code></p>
+        <p><code>.appendTo()</code> was added to YUI in 3.4.0.</code></p>
       </td>
     </tr>
 
@@ -383,7 +401,7 @@ Y.Node.create(&#x27;&lt;p&gt;foo&lt;/p&gt;&#x27;)
         <p>
 
         <p>
-          <code>.empty()</code> was added to YUI in 3.3.0.
+          <code>.empty()</code> was added to YUI in 3.4.0.
         </p>
       </td>
     </tr>
@@ -539,7 +557,7 @@ $.contains(<i>node</i>, <i>descendant</i>)
 </pre>
       </td>
       <td class="notes">
-        <p>In YUI, <code>.show()</code> and <code>.hide()</code> can be customized to use transitions supported by the <code>transition</code> module. These methods were added to YUI in 3.3.0.<p>
+        <p>In YUI, <code>.show()</code> and <code>.hide()</code> can be customized to use transitions supported by the <code>transition</code> module. These methods were added to YUI in 3.4.0.<p>
       </td>
     </tr>
     
@@ -622,8 +640,8 @@ Y.bind(<i>fn</i>, <i>context</i>)
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
+      <th class="jq">jQuery 1.6.2</th>
+      <th class="yui">YUI 3.4.0</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -902,8 +920,8 @@ if (list.size()) {
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
+      <th class="jq">jQuery 1.6.2</th>
+      <th class="yui">YUI 3.4.0</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -977,8 +995,8 @@ Y.one('#foo').hide(<i>true</i>)
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
+      <th class="jq">jQuery 1.6.2</th>
+      <th class="yui">YUI 3.4.0</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -987,7 +1005,7 @@ Y.one('#foo').hide(<i>true</i>)
     <tr>
       <td class="code"><pre class="code jq">$('<i>.foo</i>').<i>array_method</i>(<i>args</i>)</pre></td>
       <td class="code"><pre class="code yui">Y.all('<i>.foo</i>').<i>array_method</i>(<i>args</i>)</pre></td>
-      <td class="notes"><p>Any Array operation that you can perform on a jQuery list can be translated to YUI in this form. YUI NodeList objects are not native Arrays, but do provide wrapper functions for the most common array methods as of 3.3.0.</p></td>
+      <td class="notes"><p>Any Array operation that you can perform on a jQuery list can be translated to YUI in this form. YUI NodeList objects are not native Arrays, but do provide wrapper functions for the most common array methods as of 3.4.0.</p></td>
     </tr>
 
     <tr>
@@ -1047,18 +1065,13 @@ $('<i>.foo</i>').filter(fn);
       </td>
       <td class="code">
 <pre class="code yui">
-var filtered = [];
-Y.all('<i>.foo</i>').each(
-  function(node) {
-    if (node.get('<i>property</i>') === '<i>value</i>') {
-      filtered.push(node);
-    }
-  }
-);
-filtered = Y.all(filtered);
+var fn = function(node) {
+    return node.<i>property</i> === '<i>value</i>';
+};
+Y.all('<i>.foo</i>').filter(fn);
 </pre>
       </td>
-      <td class="notes"><p>Classic functional programming filter function. Given a list of elements, run the function on each and return a list of those which evaluated true. <code>NodeList.filter(fn)</code> is coming to a future point release of YUI.</p></td>
+      <td class="notes"><p>Classic functional programming filter function. Given a list of elements, run the function on each and return a list of those which evaluated true. <code>NodeList.filter(fn)</code> was added in YUI 3.4.0.</p></td>
     </tr>
 
     <tr>
@@ -1096,8 +1109,8 @@ mapped = Y.all(mapped);
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
+      <th class="jq">jQuery 1.6.2</th>
+      <th class="yui">YUI 3.4.0</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -1164,8 +1177,8 @@ Y.one('<i>#message</i>').load('<i>/ajax/test.html</i>', '<i>#foo</i>');
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
+      <th class="jq">jQuery 1.6.2</th>
+      <th class="yui">YUI 3.4.0</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
@@ -1303,8 +1316,8 @@ Y.one('<i>#message</i>').load('<i>/ajax/test.html</i>', '<i>#foo</i>');
 <table>
   <thead>
     <tr>
-      <th class="jq">jQuery 1.4.2</th>
-      <th class="yui">YUI 3.3.0</th>
+      <th class="jq">jQuery 1.6.2</th>
+      <th class="yui">YUI 3.4.0</th>
       <th class="notes">Notes</th>
     </tr>
   </thead>
